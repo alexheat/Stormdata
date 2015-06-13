@@ -67,8 +67,9 @@ stormdata.top <- group_by(stormdata.agg, EVENT) %>%
   summarize(DAMAGE=round(sum(TOTALDMG)/1000000)) %>% 
   arrange(desc(DAMAGE)) %>% top_n(10) 
 
-stormdata.top$DAMAGE <- as.factor(stormdata.top$DAMAGE)
+stormdata.top$DAMAGE <- as.numeric(as.character(stormdata.top$DAMAGE))
 stormdata.top$EVENT <- as.factor(stormdata.top$EVENT)
+stormdata.top$EVENT <- factor(stormdata.top$EVENT, stormdata.top$EVENT)
 
 ggplot(data=stormdata.top, aes(x=EVENT, y=DAMAGE, fill=DAMAGE)) +
   geom_bar(colour="black", stat="identity")  + coord_flip() + 
@@ -81,15 +82,14 @@ stormdata.top <- group_by(stormdata.agg, EVENT) %>%
   summarize(INJURIES=sum(INJURIES)) %>% 
   arrange(desc(INJURIES)) %>% top_n(10) 
 
-top10 <- stormdata.top 
-
-stormdata.top$INJURIES <- as.factor(stormdata.top$INJURIES)
+stormdata.top$INJURIES <- as.numeric(as.character(stormdata.top$INJURIES))
 stormdata.top$EVENT <- as.factor(stormdata.top$EVENT)
+stormdata.top$EVENT <- factor(stormdata.top$EVENT, stormdata.top$EVENT)
 
 ggplot(data=stormdata.top, aes(x=EVENT, y=INJURIES, fill=INJURIES)) +
   geom_bar(colour="black", stat="identity")  + coord_flip() + 
   theme(legend.position="none") + 
-  ggtitle("Most Dangerous Weather Event Types Based on Injuries to People") 
+  ggtitle("Most Dangerous Weather Events Based on Injuries to People") 
 
 #filter by the event with the max damage in each state
 agg.gb <- group_by(stormdata.agg, STATE) %>% 

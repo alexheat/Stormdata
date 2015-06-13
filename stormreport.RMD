@@ -106,6 +106,8 @@ stormdata.agg <- aggregate(stormdata.agg[c("TOTALDMG", "INJURIES")], by=list(EVE
 ```
 
 #Results
+
+##Damage to property and crops
 Floods by far caused the most damage to property and crops. Hurricanes were number 2, though flooding and storm surge are caused by hurricanes so in fact hurricanes may be the most dangerous. Further, row by row anaysis is recomended to check the relationship between hurricanes, storm surge, and floods.
 
 ``` {r warning=FALSE, message=FALSE, cache=TRUE}
@@ -125,6 +127,7 @@ ggplot(data=stormdata.top, aes(x=EVENT, y=DAMAGE, fill=DAMAGE)) +
   ylab("DAMAGE (Millions of USD)")
 ```
 
+##Injuries to people
 Tornados cause more injuries than all other types of events combined.  
 
 ``` {r warning=FALSE, message=FALSE, cache=TRUE}
@@ -144,6 +147,7 @@ ggplot(data=stormdata.top, aes(x=EVENT, y=INJURIES, fill=INJURIES)) +
 
 ```
 
+##Analyze by state
 Analyzing this data by country total may not be helpful for individual regions since weather patterns are different in different regions. For example the Northwest has very few tornados. As a final analysis I plotted the top causes of damages in each state to reveal the regional differences. 
 
 ``` {r warning=FALSE, message=FALSE, cache=TRUE}
